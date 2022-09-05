@@ -21,6 +21,8 @@ public class Post {
     private double salary;
     private String benefits;
     private String description;
+    private String language;
+    private String skill;
     @ManyToOne
     private Business business;
 }
