@@ -23,6 +23,7 @@ public class Post {
     private String description;
     private String language;
     private String skill;
+    private String address;
     @ManyToOne
     private Business business;
 }
