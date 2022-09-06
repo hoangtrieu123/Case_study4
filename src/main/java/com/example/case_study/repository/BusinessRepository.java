@@ -9,6 +9,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface BusinessRepository extends JpaRepository<Business,Long> {
-    @Query(value = "select * from post where title like :title", nativeQuery = true)
-    List<Post> findByTitle(@Param("title") String title);
+    @Query(value = "select * from business where name like :name", nativeQuery = true)
+    List<Business> findByName(@Param("name") String name);
 }
