@@ -22,6 +22,7 @@ public class ApplicationForm {
     private String address;
     private int telephone;
     private String email;
+    private String applicationUrl;
     @Transient
     private MultipartFile CV;
 

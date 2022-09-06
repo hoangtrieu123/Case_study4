@@ -1,51 +1,75 @@
 package com.example.case_study.controller;
 
 import com.example.case_study.model.ApplicationForm;
+import com.example.case_study.service.IApplicationFromService;
 import com.example.case_study.service.impl.ApplicationFormService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/application-form")
+@RequestMapping("/applications")
 public class ApplicationFormController {
     @Autowired
-    public ApplicationFormService applicationFormService;
+    public IApplicationFromService iApplicationFormService;
+
+    @Value("C:\\Users\\ADMIN\\Desktop\\case_study\\src\\main\\resources\\static\\")
+    private  String fileUpload;
+
     @GetMapping
     public ResponseEntity<List<ApplicationForm>> findAll() {
-        return new ResponseEntity<>(applicationFormService.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(iApplicationFormService.findAll(), HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<ApplicationForm> create(@RequestBody ApplicationForm applicationForm) {
-        return new ResponseEntity<>(applicationFormService.save(applicationForm), HttpStatus.CREATED);
-    }
+    @PostMapping("/create")
+    private ResponseEntity<ApplicationForm> create(@RequestPart("product") ApplicationForm applicationForm
+            , @RequestPart("file") MultipartFile file) throws IOException {
+        applicationForm.setApplicationUrl(file.getOriginalFilename());
+        try {
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ApplicationForm> update(@RequestBody ApplicationForm applicationForm) {
-        Optional<ApplicationForm> update = applicationFormService.findById(applicationForm.getId());
-        if (update.isPresent()) {
-            return new ResponseEntity<>(applicationFormService.save(applicationForm), HttpStatus.OK);
+            FileCopyUtils.copy(file.getBytes(), new File(fileUpload + file.getOriginalFilename()));
+
+        }catch (IOException ex) {
+            System.err.println("Error");
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(iApplicationFormService.save(applicationForm), HttpStatus.OK);
+    }
+
+    @PutMapping
+    private ResponseEntity<ApplicationForm> update( @RequestPart("product") ApplicationForm applicationForm
+            , @RequestPart("file") MultipartFile file) throws IOException {
+        applicationForm.setApplicationUrl(file.getOriginalFilename());
+        try {
+
+            FileCopyUtils.copy(file.getBytes(), new File(fileUpload + file.getOriginalFilename()));
+
+        }catch (IOException ex) {
+            System.err.println("Error");
+        }
+        return new ResponseEntity<>(iApplicationFormService.save(applicationForm), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ApplicationForm> delete(@PathVariable Long id) {
-        applicationFormService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        iApplicationFormService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ApplicationForm> findById(@PathVariable Long id) {
-        Optional<ApplicationForm> findById = applicationFormService.findById(id);
-        if (findById.isPresent()) {
-            return new ResponseEntity<>(findById.get(), HttpStatus.OK);
+        Optional<ApplicationForm> applicationForm = iApplicationFormService.findById(id);
+        if (applicationForm.isPresent()) {
+            return new ResponseEntity<>(applicationForm.get(), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

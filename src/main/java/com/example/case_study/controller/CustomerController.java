@@ -2,7 +2,7 @@ package com.example.case_study.controller;
 
 import com.example.case_study.model.Business;
 import com.example.case_study.model.Customer;
-import com.example.case_study.service.impl.CustomerService;
+import com.example.case_study.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,35 +16,35 @@ import java.util.Optional;
 @RequestMapping("/customers")
 public class CustomerController {
     @Autowired
-    public CustomerService customerService;
+    public ICustomerService iCustomerService;
     @GetMapping
     public ResponseEntity<List<Customer>> findAll() {
-        return new ResponseEntity<>(customerService.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(iCustomerService.findAll(), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<Customer> create(@RequestBody Customer customer) {
-        return new ResponseEntity<>(customerService.save(customer), HttpStatus.CREATED);
+        return new ResponseEntity<>(iCustomerService.save(customer), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Customer> update(@RequestBody Customer customer) {
-        Optional<Customer> update = customerService.findById(customer.getId());
+        Optional<Customer> update = iCustomerService.findById(customer.getId());
         if (update.isPresent()) {
-            return new ResponseEntity<>(customerService.save(customer), HttpStatus.OK);
+            return new ResponseEntity<>(iCustomerService.save(customer), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Business> delete(@PathVariable Long id) {
-        customerService.deleteById(id);
+        iCustomerService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Customer> findById(@PathVariable Long id) {
-        Optional<Customer> findById = customerService.findById(id);
+        Optional<Customer> findById = iCustomerService.findById(id);
         if (findById.isPresent()) {
             return new ResponseEntity<>(findById.get(), HttpStatus.OK);
         }
