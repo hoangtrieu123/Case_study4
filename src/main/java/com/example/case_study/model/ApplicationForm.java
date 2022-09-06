@@ -4,27 +4,29 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-public class Customer {
+public class ApplicationForm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String password;
-    private String nameCustomer;
+    private String fullName;
+    private String address;
     private int telephone;
     private String email;
-    private String address;
+    @Transient
+    private MultipartFile CV;
 
+    @ManyToOne
+    private Post post;
+    @ManyToOne
+    private Customer customer;
 }

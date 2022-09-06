@@ -1,7 +1,6 @@
 package com.example.case_study.controller;
 
 import com.example.case_study.model.Business;
-import com.example.case_study.model.Post;
 import com.example.case_study.service.impl.BusinessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
