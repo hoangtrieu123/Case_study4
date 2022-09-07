@@ -31,8 +31,8 @@ public class ApplicationFormController {
         return new ResponseEntity<>(iApplicationFormService.findAll(), HttpStatus.OK);
     }
 
-    @PostMapping("/create")
-    private ResponseEntity<ApplicationForm> create(@RequestPart("product") ApplicationForm applicationForm
+    @PostMapping
+    private ResponseEntity<ApplicationForm> create(@RequestPart("applicationForm") ApplicationForm applicationForm
             , @RequestPart("file") MultipartFile file) throws IOException {
         applicationForm.setApplicationUrl(file.getOriginalFilename());
         try {
@@ -46,7 +46,7 @@ public class ApplicationFormController {
     }
 
     @PutMapping
-    private ResponseEntity<ApplicationForm> update( @RequestPart("product") ApplicationForm applicationForm
+    private ResponseEntity<ApplicationForm> update( @RequestPart("applicationForm") ApplicationForm applicationForm
             , @RequestPart("file") MultipartFile file) throws IOException {
         applicationForm.setApplicationUrl(file.getOriginalFilename());
         try {

@@ -24,6 +24,7 @@ public class CustomerController {
 
     @PostMapping
     public ResponseEntity<Customer> create(@RequestBody Customer customer) {
+        customer.setRole("customer");
         return new ResponseEntity<>(iCustomerService.save(customer), HttpStatus.CREATED);
     }
 

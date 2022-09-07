@@ -23,6 +23,7 @@ public class Business {
     private  int telephone;
     private String nameBusiness;
     private String description;
+    private String role;
     private String imageUrl;
     @Transient
     private MultipartFile image;

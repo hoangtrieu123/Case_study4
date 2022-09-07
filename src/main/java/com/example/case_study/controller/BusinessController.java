@@ -38,6 +38,7 @@ public class BusinessController {
     @PostMapping
     private ResponseEntity<Business> create( @RequestPart("business") Business business
             , @RequestPart("file") MultipartFile image) throws IOException {
+        business.setRole("business");
         business.setImageUrl(image.getOriginalFilename());
         try {
             FileCopyUtils.copy(image.getBytes(), new File(fileUpload + image.getOriginalFilename()));

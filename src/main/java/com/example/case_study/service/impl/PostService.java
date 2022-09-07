@@ -31,4 +31,10 @@ public class PostService implements IPostService {
     public List<Post> findAll() {
         return postRepository.findAll();
     }
+
+    @Override
+    public List<Post> findBySearch(String title) {
+        return postRepository.findByTitleOrLanguage("%" + title + "%");
+
+    }
 }
