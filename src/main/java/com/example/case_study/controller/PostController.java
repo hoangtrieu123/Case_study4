@@ -51,9 +51,9 @@ public class PostController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    @GetMapping("/search")
-    public ResponseEntity<List<Post>> findByName(@RequestParam("title") String title) {
-        List<Post> posts = iPostService.findBySearch(title);
+    @GetMapping("/search/{name}")
+    public ResponseEntity<List<Post>> findByName(@PathVariable String name) {
+        List<Post> posts = iPostService.findBySearch(name);
         if (posts.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
