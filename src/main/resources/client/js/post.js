@@ -80,6 +80,7 @@ function displayPost1(data) {
         content += "</div>"
         content += "<div class='wrap-btn-appl'>"
         content += "<button onclick='edit(" + data[i].id + ")'>Chỉnh/Sửa bài đăng</button>"
+        content += "<button onclick='delete1(" + data[i].id + ")'>Xóa</button>"
         content += "</div>"
         content += "</div>"
         content += "</div>"
@@ -158,22 +159,24 @@ let idJD
 
 function edit(id) {
 
-    $.ajax({
-        type: "GET",
-        url: "http://localhost:8080/posts/" + id,
-        success: function (data) {
-            idJD = data.id
-            document.getElementById("title").value = data.title
-            document.getElementById("salary").value = data.salary
-            document.getElementById("benefits").value = data.benefits
-            document.getElementById("description").value = data.description
-            document.getElementById("language").value = data.language
-            document.getElementById("skill").value = data.skill
-            document.getElementById("address").value = data.address
-            document.getElementById("button").setAttribute("onclick", "editPost()")
-        }
-
-    })
+    localStorage.setItem("editid",id)
+    // $.ajax({
+    //     type: "GET",
+    //     url: "http://localhost:8080/posts/" + id,
+    //     success: function (data) {
+    //         idJD = data.id
+    //         document.getElementById("title").value = data.title
+    //         document.getElementById("salary").value = data.salary
+    //         document.getElementById("benefits").value = data.benefits
+    //         document.getElementById("description").value = data.description
+    //         document.getElementById("language").value = data.language
+    //         document.getElementById("skill").value = data.skill
+    //         document.getElementById("address").value = data.address
+    //         document.getElementById("button").setAttribute("onclick", "editPost()")
+    //     }
+    //
+    // })
+    window.location.href = "edit-post.html";
 }
 
 function editPost() {
@@ -206,3 +209,19 @@ function editPost() {
     event.preventDefault()
 
 }
+
+function delete1(id) {
+    $.ajax({
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        type: "DELETE",
+        url: "http://localhost:8080/posts/" +id,
+        success:function (){
+            Swal.fire({
+                position: 'center', icon: 'success', title: 'Thành công :D', showConfirmButton: false, timer: 1500
+            })}
+    })
+}
+
