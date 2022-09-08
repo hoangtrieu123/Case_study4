@@ -4,6 +4,8 @@ import com.example.case_study.model.Post;
 import com.example.case_study.repository.PostRepository;
 import com.example.case_study.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,4 +39,10 @@ public class PostService implements IPostService {
         return postRepository.findByTitleOrLanguage("%" + title + "%");
 
     }
+
+    @Override
+    public List<Post> findByBusinessId(Long id) {
+        return postRepository.findByBusinessId(id);
+    }
+
 }

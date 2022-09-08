@@ -1,4 +1,4 @@
-showAll()
+showAll1()
 
 function createPost() {
     let title = $('#title').val()
@@ -41,15 +41,15 @@ function createPost() {
     event.preventDefault()
 }
 
-function showAll() {
-    $.ajax({
-        type: "GET",
-        url: "http://localhost:8080/posts",
-        success: function (data) {
-            displayPost(data);
-        }
-    })
-}
+// function showAll() {
+//     $.ajax({
+//         type: "GET",
+//         url: "http://localhost:8080/posts",
+//         success: function (data) {
+//             displayPost(data);
+//         }
+//     })
+// }
 
 function displayPost1(data) {
     let content = ""
@@ -63,7 +63,7 @@ function displayPost1(data) {
         content += "</div>"
         content += "<div class='job-desc'>"
         content += "<div class='job-title'>"
-        content += "<a href='jd-page.html'>" + data[i].title + "</a>"
+        content += "<a href='jd.html'>" + data[i].title + "</a>"
         content += "</div>"
         content += "<div class='job-company'>"
         content += "<a href='#'>" + data[i].business.nameBusiness + "</a> | <a href='#' class='job-address'><i class='fa fa-map-marker' aria-hidden='true'></i>" + data[i].address + "</a>"
@@ -87,53 +87,56 @@ function displayPost1(data) {
     document.getElementById("test1").innerHTML = content
 }
 
-showAll1()
 
 function showAll1() {
+    let id = localStorage.getItem("Id")
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/posts",
+        url: "http://localhost:8080/posts/business/" + id,
         success: function (data) {
             displayPost1(data);
         }
     })
 }
 
-function displayPost(data) {
-    let content = ""
-    for (let i = 0; i < data.length; i++) {
-        content += "<div class='job pagi'>"
-        content += "<div class='job-content'>"
-        content += "<div class='job-logo'>"
-        content += "<a href='#'>"
-        content += "<img src='../static/" + data[i].business.imageUrl + "' class='job-logo-ima' alt='job-logo'>"
-        content += "</a>"
-        content += "</div>"
-        content += "<div class='job-desc'>"
-        content += "<div class='job-title'>"
-        content += "<a href='jd-page.html'>" + data[i].title + "</a>"
-        content += "</div>"
-        content += "<div class='job-company'>"
-        content += "<a href='#'>" + data[i].business.nameBusiness + "</a> | <a href='#' class='job-address'><i class='fa fa-map-marker' aria-hidden='true'></i>" + data[i].address + "</a>"
-        content += "</div>"
-        content += "<div class='job-inf'>"
-        content += "<div class='job-main-skill'>"
-        content += "<i class='fa fa-code' aria-hidden='true'></i><a href='#'>" + data[i].language + "</a>"
-        content += "</div>"
-        content += "<div id='salary' class='job-salary'>"
-        content += "<i class='fa fa-money' aria-hidden='true'></i>"
-        content += "<span class='salary-min'>" + data[i].salary + "<em class='salary-unit'> VND</em></span>"
-        content += "</div>"
-        content += "</div>"
-        content += "</div>"
-        content += "<div class='wrap-btn-appl'>"
-        content += "<a href='#' class='btn btn-appl'>Apply Now</a>"
-        content += "</div>"
-        content += "</div>"
-        content += "</div>"
-    }
-    document.getElementById("test").innerHTML = content
-}
+// function displayPost(data) {
+//     let content = ""
+//     for (let i = 0; i < data.length; i++) {
+//         content += "<div class='job pagi'>"
+//         content += "<div class='job-content'>"
+//         content += "<div class='job-logo'>"
+//         content += "<a href='#'>"
+//         content += "<img src='../static/" + data[i].business.imageUrl + "' class='job-logo-ima' alt='job-logo'>"
+//         content += "</a>"
+//         content += "</div>"
+//         content += "<div class='job-desc'>"
+//         content += "<div class='job-title'>"
+//         content += "<p id='id' >"+data[i].id + "</p>"
+//         content += "</div>"
+//         content += "<div class='job-title'>"
+//         content += "<a  href='jd.html' onclick='displayDetails()'>" + data[i].title + "</a>"
+//         content += "</div>"
+//         content += "<div class='job-company'>"
+//         content += "<a href='#'>" + data[i].business.nameBusiness + "</a> | <a href='#' class='job-address'><i class='fa fa-map-marker' aria-hidden='true'></i>" + data[i].address + "</a>"
+//         content += "</div>"
+//         content += "<div class='job-inf'>"
+//         content += "<div class='job-main-skill'>"
+//         content += "<i class='fa fa-code' aria-hidden='true'></i><a href='#'>" + data[i].language + "</a>"
+//         content += "</div>"
+//         content += "<div id='salary' class='job-salary'>"
+//         content += "<i class='fa fa-money' aria-hidden='true'></i>"
+//         content += "<span class='salary-min'>" + data[i].salary + "<em class='salary-unit'> VND</em></span>"
+//         content += "</div>"
+//         content += "</div>"
+//         content += "</div>"
+//         content += "<div class='wrap-btn-appl'>"
+//         content += "<a href='applicationForm.html' class='btn btn-appl'>Apply Now</a>"
+//         content += "</div>"
+//         content += "</div>"
+//         content += "</div>"
+//     }
+//     document.getElementById("test").innerHTML = content
+// }
 
 
 function search() {
@@ -157,7 +160,7 @@ function edit(id) {
 
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/posts/"+id,
+        url: "http://localhost:8080/posts/" + id,
         success: function (data) {
             idJD = data.id
             document.getElementById("title").value = data.title

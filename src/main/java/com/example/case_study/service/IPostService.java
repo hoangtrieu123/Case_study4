@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface IPostService extends ICRUDService<Post> {
     List<Post> findBySearch(String title);
+
+    List<Post> findByBusinessId(Long id);
 }

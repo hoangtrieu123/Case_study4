@@ -25,7 +25,7 @@ function login() {
                     timer: 1000
                 })
                 setTimeout(function () {
-                    window.location.href = "index.html";
+                    window.location.href = "published-business.html";
                 }, 1000);
             }
             if (data.role === "business") {

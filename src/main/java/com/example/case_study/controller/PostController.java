@@ -59,4 +59,12 @@ public class PostController {
         }
         return ResponseEntity.ok(posts);
     }
+    @GetMapping("/business/{id}")
+    public ResponseEntity<List<Post>> findPostByBusinessById(@PathVariable Long id){
+        List<Post> posts = iPostService.findByBusinessId(id);
+        if (posts.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(posts);
+    }
 }
