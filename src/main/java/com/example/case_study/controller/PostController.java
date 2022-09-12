@@ -38,9 +38,9 @@ public class PostController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Post> delete(@PathVariable Long id) {
+    public ResponseEntity<Post> delete(@PathVariable("id") Long id) {
         iPostService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

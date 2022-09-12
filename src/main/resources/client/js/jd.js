@@ -88,7 +88,7 @@ function displayJD(data) {
         results += "         <div class='job-info-list'>"
         results += "        <div class='row'>"
         results += "              <div class='col-sm-4'>"
-        results += "                  <span class='ji-title'>Lương:</span>"
+        results += "                  <span class='ji-title'>Lương: </span>"
         results += "             </div>"
         results += "              <div class='col-sm-8'>"
         results += "                  <span class='ji-main'>" + data[i].salary + "</span>"
@@ -122,7 +122,12 @@ function displayJD(data) {
         results += "            <i class='fa fa-map-marker ja-icn'></i>"
         results += "            <span>Trụ sở: " + data[i].business.address + " </span>"
         results += "        </li>"
+        results += "        <li>"
+        results += "            <i class='fa fa-bar-chart ja-icn'></i>"
+        results += "            <span>Tổng đài: " + data[i].business.telephone + " </span>"
+        results += "        </li>"
         results += "      </ul>"
+
         results += "        <div class='side-bar mb-3'>"
         results += "         <h2 class='widget-title'>"
 

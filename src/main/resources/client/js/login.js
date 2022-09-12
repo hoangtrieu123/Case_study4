@@ -39,7 +39,7 @@ function login() {
                     timer: 1000
                 })
                 setTimeout(function () {
-                    window.location.href = "published-recruitment.html";
+                    window.location.href = "display-post.html";
                 }, 1000);
             }
             if (data.role === "uniq") {

@@ -25,17 +25,23 @@ function createPost() {
     $.ajax({
         headers: {
             'Accept': 'application/json', 'Content-Type': 'application/json'
-        }, type: "POST", url: "http://localhost:8080/posts", data: JSON.stringify(post), success: function () {
+        }, type: "POST",
+        url: "http://localhost:8080/posts",
+        data: JSON.stringify(post),
+        success: function () {
             Swal.fire({
                 position: 'center', icon: 'success', title: 'Thành công :D', showConfirmButton: false, timer: 1500
             })
-            document.getElementById("title").value = ""
-            document.getElementById("salary").value = ""
-            document.getElementById("benefits").value = ""
-            document.getElementById("description").value = ""
-            document.getElementById("language").value = ""
-            document.getElementById("skill").value = ""
-            document.getElementById("address").value = ""
+            // document.getElementById("title").value = ""
+            // document.getElementById("salary").value = ""
+            // document.getElementById("benefits").value = ""
+            // document.getElementById("description").value = ""
+            // document.getElementById("language").value = ""
+            // document.getElementById("skill").value = ""
+            // document.getElementById("address").value = ""
+            setTimeout(function() {
+                window.location.href = "display-post.html";
+            }, 1500);
         }
     })
     event.preventDefault()
@@ -211,17 +217,15 @@ function editPost() {
 }
 
 function delete1(id) {
+    let iddelete=id
     $.ajax({
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
         type: "DELETE",
-        url: "http://localhost:8080/posts/" +id,
-        success:function (){
-            Swal.fire({
-                position: 'center', icon: 'success', title: 'Thành công :D', showConfirmButton: false, timer: 1500
-            })}
+        url: "http://localhost:8080/posts/" + iddelete,
+        success: showAll
     })
 }
 

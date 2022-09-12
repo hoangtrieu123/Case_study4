@@ -50,8 +50,14 @@ function updatePost() {
         data: JSON.stringify(post),
         success: function () {
             Swal.fire({
-                position: 'center', icon: 'success', title: 'Thành công :D', showConfirmButton: false, timer: 1500
+                position: 'center',
+                icon: 'success', title: 'Thành công :D',
+                showConfirmButton: false, timer: 1500,
+
             })
+            setTimeout(function() {
+                window.location.href = "display-post.html";
+            }, 1500);
         }
     })
 }
